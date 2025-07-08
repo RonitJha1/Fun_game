@@ -1,0 +1,157 @@
+def Mix_Game():
+    while True:
+        Enter = str(input("Enter 'Run' to run this program and 'Exit' to end this program:")).capitalize()
+        if Enter == "Run":
+            while True:
+                print("\n🎮 Welcome to Ronit's Code Clash - A Mini Game Hub!")
+                print("Get ready to play Guess the Number, Rock Paper Scissors, and Even-Odd Challenge!\n")
+
+                print("Enter '1' to play guessing game.....")
+                print("Enter '2' to play rock paper scissors...")
+                print("Enter '3' to play even odd guessing game...")
+                print("Enter 'Exit' to End this game program....")
+                print("\n")
+                guess=str(input("Enter:")).capitalize()
+                if guess=="1":
+                    import random
+                    def Fun():
+                        guess_no = random.randint(1, 100)  # 1 to 100 meaning the number will generate between 1 to 100
+                        print("Are you ready to play? Enter 'Yes' to play or 'No' to quit.")
+
+                        while True:  # loop will run until any break doesn't come
+                            Enter = input("Enter : ").capitalize()  # Yes to user the program and no to don't use the program
+                            if Enter == "Yes":
+                                players = []  # to store players name
+                                try:
+                                    Player = int(input("How many players want to play? "))
+                                except ValueError:
+                                    print("please enter number only")
+                                    continue
+                                for i in range(Player):  # players name inputing loop
+                                    name = input(f"Enter name of Player {i + 1}: ")
+                                    players.append(
+                                        {"name": name, "attempts": 0})  # append help to save players name in list
+
+                                winner = None  # main loop
+                                while not winner:  # the loop will run until anyone become winner
+                                    for player in players:
+                                        try:
+                                            guess = int(input(
+                                                f"{player['name']}, enter your guess: "))  # every time player trun change
+                                        except ValueError:
+                                            print("please enter no only...")
+                                            continue
+                                        player["attempts"] += 1  # every time attempts increase
+
+                                        if guess == guess_no:
+                                            winner = player
+                                            break
+                                        elif guess < guess_no:
+                                            print("Too low.")
+                                        else:
+                                            print("Too high.")
+
+                                print(f"\n {winner['name']} won the game in {winner['attempts']} attempts.........!")
+                                break
+                            elif Enter == "No":
+                                print("Thanks for visiting our game!")
+                                break  # while true break line
+                            else:
+                                print("Please enter only 'Yes' or 'No'.")
+
+                    Fun()
+                elif guess=="2":
+                    import random
+
+                    def get_user_choice():
+
+                        while True:
+                            choice = input("Enter Rock, Paper, or Scissors: ").capitalize()
+                            if choice in ["Rock", "Paper", "Scissors"]:
+                                return choice
+                            else:
+                                print("Invalid choice. Please try again.")
+
+                    def get_computer_choice():
+                        """Randomly select Rock, Paper, or Scissors for the computer."""
+                        return random.choice(["Rock", "Paper", "Scissors"])
+
+                    def determine_winner(user, computer):
+                        if user == computer:
+                            return "Tie"
+                        elif (user == "Rock" and computer == "Scissors") or \
+                                (user == "Paper" and computer == "Rock") or \
+                                (user == "Scissors" and computer == "Paper"):
+                            return "Win"
+                        else:
+                            return "Lose"
+
+                    def play_game():
+                        print("Are you ready to play? Enter 'Yes' to play or 'No' to exit.")
+                        while True:
+                            Enter = input("Enter 'Yes' or 'No': ").capitalize()
+                            if Enter == "Yes":
+                                user_choice = get_user_choice()
+                                computer_choice = get_computer_choice()
+                                print(f"\nYou chose: {user_choice}")
+                                print(f"Computer chose: {computer_choice}")
+
+                                result = determine_winner(user_choice, computer_choice)
+                                print(f"Result: You {result}!\n")
+                            elif Enter == "No":
+                                print("Thanks for visiting our game...")
+                                break
+                            else:
+                                print("Please enter only 'Yes' or 'No'.")
+
+                    play_game()
+                elif guess=="3":
+                    import  random
+                    def get_user_number():
+                        while True:
+                            User = int(input("Enter number to 1 to 10:"))
+                            if User >= 1 and User <= 10:
+                                return User  # return use for send value or data outside of function
+                            else:
+                                print("Enter only in 1 to 100..")
+
+                    def get_computer_number():
+                        return random.randint(1, 10)  # random number generate between 1 to 10
+
+                    def get_user_guess():
+                        while True:  # while true work for use loop infinite time when user doesn't give proper input
+                            guess = input("Enter your guess: type 'Even' or 'Odd': ").capitalize()
+                            if guess in ['Even', 'Odd']:
+                                return guess
+                            else:
+                                print("Invalid guess. Please enter 'Even' or 'Odd'.")
+
+                    def check_even_odd(user_num, com_num):  # user_num and com_num is two perimeters
+                        total = user_num + com_num
+                        print(f"User number: {user_num}, Computer number: {com_num}, Total: {total}")
+                        if total % 2 == 0:
+                            print("Even")
+                            return "Even"
+                        else:
+                            print("Odd")
+                            return "odd"
+
+                    def mix():
+                        user_num = get_user_number()  # get_user_number function value is inside of user_num value
+                        com_num = get_computer_number()  # same
+                        user_guess = get_user_guess()  # same
+                        result = check_even_odd(user_num, com_num)  # same
+
+                        if user_guess == result:  # if user guess  and computer output is even than the user win or loose
+                            print("You win!")
+                        else:
+                            print("You lose!")
+
+                    mix()
+
+                elif guess=="Exit":
+                    break
+        elif Enter == "Exit":
+            print("thanks to visiting out multi game page....")
+            break
+Mix_Game()
